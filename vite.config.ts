@@ -20,10 +20,21 @@ export default defineConfig({
       "@shared": path.resolve(__dirname, "shared"),
     },
   },
-  base: "/portfolio/",
+  base: "/",
   root: path.resolve(__dirname, "client"),
   build: {
     outDir: path.resolve(__dirname, "dist/public"),
     emptyOutDir: true,
   },
+  server: {
+    headers: {
+      'Content-Security-Policy':
+        "default-src 'self' data: blob:; " +
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval'; " +
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
+        "font-src 'self' https://fonts.gstatic.com; " +
+        "img-src 'self' data:; " +
+        "connect-src 'self';"
+    }
+  }
 });
