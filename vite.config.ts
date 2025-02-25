@@ -20,11 +20,21 @@ export default defineConfig({
       "@shared": path.resolve(__dirname, "shared"),
     },
   },
-  base: "/",
+  base: "/Portfolio/",
   root: path.resolve(__dirname, "client"),
   build: {
     outDir: path.resolve(__dirname, "dist/public"),
     emptyOutDir: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000,
   },
   server: {
     headers: {
